@@ -3,7 +3,7 @@ import Answers from "./Answers";
 import questions from "../questions";
 import { useState } from "react";
 
-function Question({ key, onSelectAnswer, onSkipAnswer }) {
+function Question({ index, onSelectAnswer, onSkipAnswer }) {
   const [answer, setAnswer] = useState({
     selectedAnswer: "",
     isCorrect: null,
@@ -17,7 +17,7 @@ function Question({ key, onSelectAnswer, onSkipAnswer }) {
     setTimeout(() => {
       setAnswer({
         selectedAnswer: answer,
-        isCorrect: questions[key].answers[0] === answer,
+        isCorrect: questions[index].answers[0] === answer,
       });
       setTimeout(() => {
         onSelectAnswer(answer);
@@ -32,9 +32,9 @@ function Question({ key, onSelectAnswer, onSkipAnswer }) {
   return (
     <div id="questions">
       <QuestionTimer timeout={1000} onTimeout={onSkipAnswer} />
-      <h2>{questions[key].text}</h2>
+      <h2>{questions[index].text}</h2>
       <Answers
-        answers={questions[key].answers}
+        answers={questions[index].answers}
         selectedAnswer={answer.selectedAnswer}
         answerState={answerState}
         onSelect={handleSelectAnswer}
