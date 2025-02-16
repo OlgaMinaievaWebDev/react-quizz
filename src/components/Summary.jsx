@@ -7,8 +7,12 @@ function Summary({ userAnswer }) {
     (answer, index) => answer === questions[index].answers[0]
   );
 
-  const skippedAnswerShare = (skippedAnswers.length / userAnswer.length) * 100;
-  const correctAnswerShare = (correctAnswers.length / userAnswer.length) * 100;
+  const skippedAnswerShare = Math.floor(
+    (skippedAnswers.length / userAnswer.length) * 100
+  );
+  const correctAnswerShare = Math.floor(
+    (correctAnswers.length / userAnswer.length) * 100
+  );
   const wrongAnswersShare = 100 - skippedAnswerShare - correctAnswerShare;
   return (
     <div id="summary">
@@ -41,10 +45,10 @@ function Summary({ userAnswer }) {
           }
 
           return (
-            <li key={answer}>
+            <li key={index}>
               <h3>{index + 1}</h3>
               <p className="question">{questions[index].text}</p>
-              <p className="user-answer">{answer ?? "Skipped"}</p>
+              <p className={cssClass}>{answer ?? "Skipped"}</p>
             </li>
           );
         })}
